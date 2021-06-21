@@ -5,6 +5,7 @@ import Popup from "./Popup";
 import Headline from "../Global/Headline";
 import Subtitle from "../Global/Subtitle";
 import QuizGame from "../QuizGame/QuizGame";
+import ErrorBoundary from "./ErrorBoundary";
 
 import "../../style/LandingPage/LandingPage.css";
 
@@ -65,11 +66,13 @@ export default class LandingPage extends React.Component {
     },
     {
       categoryName: "electronics",
-      categoryLabel: "Electronic gadgets",
+      categoryLabel: "📲 Electronic gadgets",
       id: 30
     }]
 
     this.setState({categoryArray: categories});
+
+
   }
 
 
@@ -111,56 +114,59 @@ export default class LandingPage extends React.Component {
 
     return (
       <div>
-        {this.state.displayQuizGame ? null : (
-          <Headline text={"MCQ Quiz Game"} />
-        )}
+        <ErrorBoundary>
+      
+          {this.state.displayQuizGame ? null : (
+            <Headline text={"MCQ Quiz Game"} />
+          )}
 
-        {this.state.displayQuizGame ? (
-            <QuizGame
-              category={this.state.category}
-              categoryDetails= {this.state.categoryDetails}
-              difficulty={this.state.difficulty}
-              displayQuizGame={this.state.displayQuizGame}
+          {this.state.displayQuizGame ? (
+              <QuizGame
+                category={this.state.category}
+                categoryDetails= {this.state.categoryDetails}
+                difficulty={this.state.difficulty}
+                displayQuizGame={this.state.displayQuizGame}
+                goBackToMainMenu={this.goBackToMainMenu}
+              />
+          ) : 
+          (
+            <div id="CategoriesContainer">
+              <Subtitle text="Select MCQ category in which you want to test your knowledge"/>
 
+              <hr />
 
+              <div className={"category-grid"}>
 
-              goBackToMainMenu={this.goBackToMainMenu}
-            />
-        ) : 
-        (
-          <div id="CategoriesContainer">
-            <Subtitle text="Select MCQ category in which you want to test your knowledge"/>
+                {this.state.categoryArray ? (
+                  this.state.categoryArray.map((categoryItem)=>(
+                    <Card
+                      togglePopup={this.togglePopup}
+                      category={categoryItem.categoryName}
+                      text={categoryItem.categoryLabel}
+                      key={categoryItem.id}
+                      id={categoryItem.id}
+                      categoryDetails={categoryItem}
+                    />
+                  ))
+                ) : <h3> {"Categories are loading"} </h3>}
 
-            <hr />
+              </div>
 
-            <div className={"category-grid"}>
-
-              {this.state.categoryArray ? (
-                this.state.categoryArray.map((categoryItem)=>(
-                  <Card
-                    togglePopup={this.togglePopup}
-                    category={categoryItem.categoryName}
-                    text={categoryItem.categoryLabel}
-                    key={categoryItem.id}
-                    id={categoryItem.id}
-                    categoryDetails={categoryItem}
-                  />
-                ))
-              ) : <h3> {"Categories are loading"} </h3>}
+              {this.state.showPopup ? (
+                <Popup
+                  text={"popup"}
+                  showQuizGame={this.showQuizGame}
+                  closePopup={this.togglePopup}
+                />
+              ) : null}
 
             </div>
+          )}
 
-            {this.state.showPopup ? (
-              <Popup
-                text={"popup"}
-                showQuizGame={this.showQuizGame}
-                closePopup={this.togglePopup}
-              />
-            ) : null}
-
-          </div>
-        )}
+        </ErrorBoundary>
       </div>
+
+      
 
     );
   }

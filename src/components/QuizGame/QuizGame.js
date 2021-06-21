@@ -22,6 +22,9 @@ const Timer = (props) => { //a separate component to show passed time for modula
 
         let secondsInterval = setInterval(() => {           
             setSeconds(seconds=>{
+              if (seconds === 15) {
+                props.completeQuiz();
+              }
               return parseInt( (seconds+1)%60 ) ;
             });
         }, 1000);
@@ -40,9 +43,10 @@ const Timer = (props) => { //a separate component to show passed time for modula
 
     return (
         <div className="passedTimeContainer">
-          <span className="timer">Time : {'\u00A0'}
-                <span id="minutes">{minutes}</span> minute(s)
-                <span id="seconds">{seconds}</span> seconds.
+          <span>{props.cateory} {'\u00A0'}</span>
+          <span className="timer">Time : {'\u00A0'} 
+              <span id="minutes">{minutes}</span> minute(s)
+              <span id="seconds">{seconds}</span> seconds.
           </span>
         </div>
     )
@@ -57,14 +61,13 @@ export default class QuizGame extends Component {
       isLoading: true,
       QAndAsequence: [],
       AnswerSequence: [],
+      correctAnswerSequence: [],
       currentQandA: null,
       currentIndex: 0,
       score: 0,
+      showScoreBoard: false,
       totalQuestionsSolved: 0,
-      questionCorrectlySolved: 0,
-      canClickOnAnswer: true,
-      minutes: 0,
-      seconds: 0
+      correctOrNotSequence: [],
 
     };
   }
@@ -80,7 +83,7 @@ export default class QuizGame extends Component {
 
             console.log(res);
             let results = res.data.results;
-            let QAndA, options;
+            let QAndA, options,correctAnswerSequence=[];
             let QAndAsequence = results.map((item)=>{
                 QAndA = {};
                 QAndA.question = item.question.replace(/&quot;/g, '\\"');
@@ -89,6 +92,7 @@ export default class QuizGame extends Component {
                 QAndA.options = options;
                 QAndA.correctAnswer = item.correct_answer;
                 QAndA.id = shortid.generate();
+                correctAnswerSequence.push(item.correct_answer);
 
                 return QAndA;
 
@@ -98,76 +102,57 @@ export default class QuizGame extends Component {
             this.setState({
               QAndAsequence: QAndAsequence,
               currentQandA: QAndAsequence[0],
+              correctAnswerSequence: correctAnswerSequence,
               isLoading: false
             });
         })
         .catch((err)=>{
-          console.warn('Could retrieve data from API');
+          console.warn('Could not retrieve data from API');
         });
 
   }
 
   updateQuestion = (event)=>{
 
-    console.log(event);
-    let newIndex = event.target.name === "nextButton" ? this.state.currentIndex+1 : this.state.currentIndex -1
-    //let previouslySelectedAnswer = 
-    
+    let newIndex = event.target.name === "nextButton" ? this.state.currentIndex+1 : this.state.currentIndex -1;
     this.setState({currentIndex: newIndex,
         currentQandA: this.state.QAndAsequence[newIndex]});
-  }   
+  }
 
 
-
-  // refresh = () => {
-  //   if (this.state.totalQuestionsSolved >= 10) {
-
-  //     this.setState({
-  //       isLoading: true,
-  //       totalQuestionsSolved: 0,
-  //       borderColorOnClick: "#9932cc",
-  //       canClickOnAnswer: true,
-  //     });
-  //   } else {
-  //     this.setState((state) => ({
-  //       isLoading: true,
-  //       totalQuestionsSolved: state.totalQuestionsSolved + 1,
-  //       borderColorOnClick: "#9932cc",
-  //       canClickOnAnswer: true,
-  //     }));
-  //   }
-  //   this.getQuizGame();
-  // };
-
-  recordAndCheckAnswer = (answer) => {
+  recordAndCheckAnswer = (answer,questionIndex) => {
 
     let AnswerSequence = this.state.AnswerSequence ;
+    let correctOrNotSequence = this.state.correctOrNotSequence ;
     let stateObj = this.state;
+    console.log(questionIndex);
 
+    AnswerSequence[this.state.currentIndex] = answer;
 
-    if (this.state.canClickOnAnswer) {
-        AnswerSequence[this.state.currentIndex] = answer;
+    if (answer === this.state.currentQandA.correctAnswer) {
 
-      if (answer === this.state.currentQandA.correctAnswer) {
-       
-       
-          stateObj.questionCorrectlySolved = stateObj.questionCorrectlySolved + 1;
-          stateObj.totalQuestionsSolved = stateObj.totalQuestionsSolved + 1;
-          stateObj.score = stateObj.score+1;
-          stateObj.AnswerSequence = AnswerSequence;
-
-      }
-      else {
-       
-        stateObj.totalQuestionsSolved= stateObj.totalQuestionsSolved + 1;
-        stateObj.AnswerSequence= AnswerSequence;
-      }
-
-      this.setState(stateObj);
-
-      
+        correctOrNotSequence[this.state.currentIndex] = true;
+        stateObj.correctOrNotSequence = correctOrNotSequence;
     }
-  };
+    else {
+      correctOrNotSequence[this.state.currentIndex] = false;
+      stateObj.correctOrNotSequence = correctOrNotSequence;
+    
+    }
+
+    stateObj.AnswerSequence= AnswerSequence;
+    stateObj.totalQuestionsSolved = AnswerSequence.reduce((ctr,item)=>{
+      ctr = typeof item === "string"? ctr+1 : ctr;
+      return ctr;
+    },0);
+
+    this.setState(stateObj);
+  }
+
+  completeQuiz = (event)=>{
+
+    this.setState({showScoreBoard:true});
+  }   
 
   render() {
 
@@ -175,7 +160,7 @@ export default class QuizGame extends Component {
     console.log('rendered previouslySelectedAnswer is '+previouslySelectedAnswer);
     console.log(this.state);
 
-    const boardToShow = (this.state.currentQandA !== null && this.state.totalQuestionsSolved < 10) ? (  //TODO: make 10 a state value 
+    const boardToShow = (this.state.currentQandA !== null && this.state.totalQuestionsSolved < 10 && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
       <div>
         <QuizGameBoard
           totalQuestionsSolved={this.state.totalQuestionsSolved}
@@ -184,6 +169,7 @@ export default class QuizGame extends Component {
           previouslySelectedAnswer = {previouslySelectedAnswer}
           recordAndCheckAnswer={this.recordAndCheckAnswer}
           questionNumber ={this.state.currentIndex+1}
+          currentIndex = {this.state.currentIndex}
         />
 
         <div className={"quizGameBtnGrp"}>
@@ -199,7 +185,6 @@ export default class QuizGame extends Component {
     ):
     (
       <ScoreBoard
-        // refresh={this.refresh}
         questionCorrectlySolved={this.state.questionCorrectlySolved}
         totalQuestionsSolved={this.state.totalQuestionsSolved}
         goBackToMainMenu={this.props.goBackToMainMenu}
@@ -208,7 +193,9 @@ export default class QuizGame extends Component {
 
     const contentToShow = !this.state.isLoading ? (
       <div>
-          <Timer initialMinute={0} initialSeconds={0} />
+          <Timer initialMinute={0} initialSeconds={0}
+          cateory={this.props.categoryDetails.categoryLabel}
+          completeQuiz= {this.completeQuiz}/>
           {boardToShow}
       </div>
       
@@ -216,7 +203,7 @@ export default class QuizGame extends Component {
     (
       <div>
         <div style={{marginTop: "10rem"}}>
-          <Subtitle text={"🐱‍🏍 Getting questions..."} />
+          <Subtitle text={"🐱‍🏍 Loading questions..."} />
           <br />
           <Loader type="TailSpin" color="#7d4bc3" height={90} width={90} />
         </div>

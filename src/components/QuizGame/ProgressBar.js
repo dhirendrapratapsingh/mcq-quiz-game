@@ -17,12 +17,15 @@ const ProgressBar = (props) => {
     bgcolor = "#00ff00";
   }
 
+
+  //We can give give inline styls as objects to component' style attrivute. Just a demo of that. This has highest specificity
+
   const containerStyles = {
     height: "1.5rem",
     width: "30rem",
     backgroundColor: "#e0e0de",
     borderRadius: "1rem",
-    margin: ".3rem",
+    margin: "20px 10px 0px 10px"
   };
 
   const fillerStyles = {
@@ -35,6 +38,7 @@ const ProgressBar = (props) => {
   const labelStyles = {
     color: "white",
     fontWeight: "bold",
+    marginLeft: '10px'
   };
 
   return (

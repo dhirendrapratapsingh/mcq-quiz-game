@@ -9,7 +9,7 @@ const QuizGameBoard = function QuizQuestionBoard (props) {
   const [options, setOptions]= useState([]);
 
   const sendAnswer = (optionText)=>{
-    props.recordAndCheckAnswer(optionText);
+    props.recordAndCheckAnswer(optionText,props.currentIndex);
   }
 
 
