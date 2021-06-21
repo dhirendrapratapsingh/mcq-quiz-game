@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap");
+
+.subtitle {
+  display: block;
+  margin: 0 12px;
+  font-size: 1.8rem;
+  font-family: "Kanit", sans-serif;
+  text-align: center;
+}

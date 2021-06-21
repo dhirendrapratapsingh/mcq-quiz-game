@@ -1,0 +1,150 @@
+.primaryBtn {
+
+  align-items: center;
+  background: #00bcd4;
+  font-size: 1.4rem;
+  color: #fff;
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem,
+    rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+  height: 3rem;
+  margin: 1rem;
+  width: 25%;
+  min-width: 160px;
+  border-radius: 10px;
+  transition: all 500ms;  /* This line alone adds a lot of class to your UX*/
+  overflow: hidden;
+
+  font-family: "Acme", sans-serif;
+  background-size: cover;
+  cursor: pointer;
+  user-select: none;
+}
+
+.disabled{
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.quizGameBtnGrp {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+/* Very small screens */
+@media only screen and (max-width: 300px) {
+  .rad-label,
+  .primaryBtn {
+    width: 15rem;
+  }
+}
+
+
+.passedTimeContainer{
+  text-align: center;
+  margin: 10px;
+}
+.passedTimeContainer span{
+  font-family: cursive,Arial, sans-serif;
+}
+
+
+/* soothing radio buttons */
+
+.QuizCard-container {
+  border: 3px solid #00bcd4;
+  border-radius: 10px;
+  margin: 10px 20px;
+  padding: 0px 20px;
+  background: #ecf0f1;
+}
+
+.QuizCard-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 20px;
+}
+
+
+.QuizCard-title {
+  font-family: "Roboto Slab", serif;
+  color: #2c3e50;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  word-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
+  box-shadow: (255 255 255/10%) 0px 1px 1px 0px inset, rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+}
+
+.rad-label {
+  display: flex;
+  align-items: center;
+
+  border-radius: 100px;
+  padding: 14px 16px;
+  margin: 10px 0;
+
+  cursor: pointer;
+  transition: .3s;
+}
+
+.rad-label:hover,
+.rad-label:focus-within {
+  background: hsla(0, 0%, 80%, .14);
+}
+
+.rad-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  z-index: -1;
+}
+
+.rad-design {
+  width: 22px;
+  height: 22px;
+  border-radius: 100px;
+
+  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+  position: relative;
+}
+
+.rad-design::before {
+  content: '';
+
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+
+  background: hsl(0, 0%, 90%);
+  transform: scale(1.1);
+  transition: .3s;
+}
+
+.rad-input:checked+.rad-design::before {
+  transform: scale(0);
+}
+
+.rad-text {
+  color: hsl(0, 0%, 60%);
+  margin-left: 14px;
+  letter-spacing: 3px;
+  font-size: 18px;
+  font-weight: 600;
+  user-select: none;
+  transition: .3s;
+}
+
+.rad-input:checked~.rad-text {
+  color: hsl(0, 0%, 40%);
+}
+

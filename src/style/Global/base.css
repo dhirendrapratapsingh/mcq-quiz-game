@@ -1,0 +1,34 @@
+
+:root {
+  --gray1: #dbe1e8;
+  --gray5: #2a2e35;
+  --gray6: #12181b;
+  --red-dark: #ff1443;
+  --purple-dark: #7d4bc3;
+  --yellow-dark: #ffd633;
+  --h-border: 2px dashed var(--gray5);
+  --card-bg: var(--gray5);
+}
+
+body {
+  color: #fff;
+  background: #000428;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+hr {
+  margin-bottom: 3rem;
+  display: block;
+  overflow: hidden;
+  border-style: inset;
+  border-width: 1px;
+  border: none;
+  border-bottom: var(--h-border);
+}
+
+button:focus {
+  outline: none;
+}

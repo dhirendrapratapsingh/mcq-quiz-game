@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap");
+
+.headline {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 3rem;
+  font-family: "Kanit", sans-serif;
+  text-align: center;
+}
+.flotingTitle{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  background: #000428;
+  z-index: 10;
+  height: 90px;
+  z-index: 10;
+}

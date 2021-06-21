@@ -1,0 +1,41 @@
+@import url("../Global/base.css");
+@import url("./Popup.css");
+
+.category-grid {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+#CategoriesContainer{
+  margin-top: 90px;
+}
+
+/* Small screens */
+@media only screen and (max-width: 800px) {
+  .headline {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+  .card{
+    font-size: 1rem;
+    height: 3rem;
+  }
+  html{
+    height: auto;
+  }
+}
+
+/* Very small screens */
+@media only screen and (max-width: 300px) {
+  .headline {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}
