@@ -88,7 +88,7 @@ export default class LandingPage extends React.Component {
 
   // Show quiz game once the category & difficulty is selected
   showQuizGame = (difficulty) => {
-    console.log(this.state.category)
+      
     if (difficulty) {
       this.setState({
         difficulty: difficulty,

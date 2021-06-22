@@ -41,15 +41,15 @@ const Timer = (props) => { //a separate component to show passed time for modula
 
     return (
         <div>
-            {props.hideTime? (
-                <div className="passedTimeContainer">
-                    <span>{props.cateory} {'\u00A0'}</span>
-                    <span className="timer" style={{ display: props.hideTime ? "none" : "block" }}>Time : {'\u00A0'}
-                        <span id="minutes">{minutes}</span> minute(s)
-                        <span id="seconds">{seconds}</span> seconds.
-                    </span>
-                </div>
-            ):(null)}
+          
+            <div className="passedTimeContainer">
+                <span>{props.cateory} {'\u00A0'}</span>
+                <span className="timer" style={{ display: props.hideTime ? "none" : "block" }}>Time : {'\u00A0'}
+                    <span id="minutes">{minutes}</span> minute(s)
+                    <span id="seconds">{seconds}</span> seconds.
+                </span>
+            </div>
+           
         </div>
        
     )
@@ -71,7 +71,7 @@ export default class QuizGame extends Component {
             showScoreBoard: false,
             totalQuestionsSolved: 0,
             correctOrNotSequence: [],
-
+            mode: 'online'
         };
     }
 
@@ -80,12 +80,10 @@ export default class QuizGame extends Component {
         const categoryNum = this.props.categoryDetails.id;
         const difficulty = this.props.difficulty;
         let retrievedData ={};
-        console.log(categoryNum, difficulty);
 
-        axios.get(`https://opentdbb.com/api.php?amount=10&category=${categoryNum}&difficulty=${difficulty}&type=multiple`)
+        axios.get(`https://opentdb.com/api.php?amount=10&category=${categoryNum}&difficulty=${difficulty}&type=multiple`)
             .then(res => {
 
-                console.log(res);
                 let results = res.data.results;
                 let QAndA, options, correctAnswerSequence = [];
                 let QAndAsequence = results.map((item) => {
@@ -101,7 +99,6 @@ export default class QuizGame extends Component {
                     return QAndA;
 
                 });
-                console.log(QAndAsequence);
 
                 this.setState({
                     QAndAsequence: QAndAsequence,
@@ -124,7 +121,13 @@ export default class QuizGame extends Component {
                         QAndAsequence: retrievedData.QAndAsequence,
                         currentQandA: retrievedData.QAndAsequence[0],
                         correctAnswerSequence: retrievedData.correctAnswerSequence,
-                        isLoading: false
+                        isLoading: false,
+                        mode: 'offline'
+                    });
+                }
+                else{
+                    this.setState({
+                        mode: 'offline'
                     });
                 }
 
@@ -190,8 +193,7 @@ export default class QuizGame extends Component {
     render() {
 
         let previouslySelectedAnswer = this.state.AnswerSequence[this.state.currentIndex] || "";
-        console.log('rendered previouslySelectedAnswer is ' + previouslySelectedAnswer);
-        console.log(this.state);
+        //console.log(this.state);
 
         const boardToShow = (this.state.currentQandA !== null && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
             <div>
@@ -242,7 +244,10 @@ export default class QuizGame extends Component {
                     <div style={{ marginTop: "10rem" }}>
                         <Subtitle text={"🐱‍🏍 Loading questions..."} />
                         <br />
-                        <Loader type="TailSpin" color="#7d4bc3" height={90} width={90} />
+                        <div style={{width: '100px',margin: 'auto'}}>
+                            <Loader type="TailSpin" color="#7d4bc3" height={90} width={90} />
+                        </div>
+                        
                     </div>
                 </div>
             );
@@ -250,6 +255,13 @@ export default class QuizGame extends Component {
         return (
 
             <div className="quizContnr">
+                <div style={{ textAlign: "center",color: '#9F6000',backgroundColor: '#FEEFB3' }}>
+                {
+                    this.state.mode === 'offline'?
+                    <label>You are in offline mode, check Internet connectivity</label>:
+                    null
+                }
+                </div>
                 <ProgressBar completed={this.state.totalQuestionsSolved * 10} />
                 {contentToShow}
             </div>
