@@ -26,7 +26,7 @@ const QuizGameBoard = function QuizQuestionBoard (props) {
         ));
         setOptions(optionsArr);
 
-  },[ props]);
+  },[props]);
 
   return (
     <div>

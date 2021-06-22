@@ -16,12 +16,14 @@ export default class Popup extends React.Component {
         <div className={"popupContainer"}>
           <div className={"popupDialog"}>
             
-            <span >💪 Select Difficulty level</span>
+            <span className="popupTitle" >💪 Select Difficulty level</span>
+
             <button
               className={"closeBtn"}
               onClick={() => this.props.closePopup("")}>
               ❌
             </button>
+
             <div className={"btnGrp"}>
               <button
                 className={"difficultyBtn"}
@@ -42,6 +44,14 @@ export default class Popup extends React.Component {
                 😎Hard
               </button>
             </div>
+
+            <div id="note">
+              <p>Note : You will get 10 minutes to solve 10 mulptile choice quetions</p>
+              <p>Quiz will start as soon as you select difficulty level</p>
+              <p>There is no negative marking. Best of luck !</p>
+            </div>
+
+
           </div>
           
         </div>

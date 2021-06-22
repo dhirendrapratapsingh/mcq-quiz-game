@@ -9,8 +9,6 @@ import ScoreBoard from "./ScoreBoard";
 import axios from 'axios'
 
 
-
-
 const Timer = (props) => { //a separate component to show passed time for modularity avoid useless update
 
     const {initialMinute = 0,initialSeconds = 0} = props;
@@ -39,12 +37,12 @@ const Timer = (props) => { //a separate component to show passed time for modula
             clearInterval(secondsInterval);
             clearInterval(minutesInterval);
           };
-    },[]);
+    });
 
     return (
         <div className="passedTimeContainer">
           <span>{props.cateory} {'\u00A0'}</span>
-          <span className="timer">Time : {'\u00A0'} 
+          <span className="timer" style={{display : props.hideTime ? "none": "block"}}>Time : {'\u00A0'} 
               <span id="minutes">{minutes}</span> minute(s)
               <span id="seconds">{seconds}</span> seconds.
           </span>
@@ -147,11 +145,20 @@ export default class QuizGame extends Component {
     },0);
 
     this.setState(stateObj);
+
+    if (stateObj.totalQuestionsSolved === 10) {
+      this.completeQuiz();
+    }
   }
 
-  completeQuiz = (event)=>{
+  completeQuiz = ()=>{
 
-    this.setState({showScoreBoard:true});
+    let score = this.state.correctOrNotSequence.reduce((score,isCorrect)=>{
+      return isCorrect ? score+1 : score;
+    },0) ;
+
+    this.setState({showScoreBoard:true,
+                    score: score});
   }   
 
   render() {
@@ -160,7 +167,7 @@ export default class QuizGame extends Component {
     console.log('rendered previouslySelectedAnswer is '+previouslySelectedAnswer);
     console.log(this.state);
 
-    const boardToShow = (this.state.currentQandA !== null && this.state.totalQuestionsSolved < 10 && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
+    const boardToShow = (this.state.currentQandA !== null && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
       <div>
         <QuizGameBoard
           totalQuestionsSolved={this.state.totalQuestionsSolved}
@@ -185,9 +192,11 @@ export default class QuizGame extends Component {
     ):
     (
       <ScoreBoard
-        questionCorrectlySolved={this.state.questionCorrectlySolved}
+        questionCorrectlySolved={this.state.score}
         totalQuestionsSolved={this.state.totalQuestionsSolved}
         goBackToMainMenu={this.props.goBackToMainMenu}
+        yourAnswers={this.state.AnswerSequence}
+        correctAnswers={this.state.correctAnswerSequence}
       />
     );
 
@@ -195,7 +204,9 @@ export default class QuizGame extends Component {
       <div>
           <Timer initialMinute={0} initialSeconds={0}
           cateory={this.props.categoryDetails.categoryLabel}
-          completeQuiz= {this.completeQuiz}/>
+          completeQuiz= {this.completeQuiz}
+          hideTime={this.state.showScoreBoard}/>
+
           {boardToShow}
       </div>
       

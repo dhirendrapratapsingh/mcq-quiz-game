@@ -2,3 +2,34 @@
   margin: 3rem;
   font-size: 3rem;
 }
+.answerRow{
+  display: flex;
+  justify-content: space-between;
+  padding: 1vh 10vh;
+  margin: 10px;
+}
+
+#answerContainer > .heading{
+  background-color: #000428;
+  background-image: linear-gradient(to top, #ecf0f1 0%, gray 70%);
+  border-radius: 10px 10px 0px 0px;
+}
+#answerContainer > .heading> label{
+  color: white;
+}
+
+.answerRow > label{
+  color: black;
+  font-size: 14px;
+}
+.correct::before{
+  content: "✔️";
+  width: 25px;
+  margin-right: 10px;
+}
+
+.incorrect::before{
+  content: "❌";
+  width: 25px;
+  margin-right: 10px;
+}

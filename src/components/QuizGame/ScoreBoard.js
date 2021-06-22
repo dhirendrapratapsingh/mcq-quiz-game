@@ -1,4 +1,5 @@
 import React from "react";
+import Subtitle from "../Global/Subtitle";
 
 import "../../style/QuizGame/ScoreBoard.css";
 import "../../style/QuizGame/QuizGameBoard.css";
@@ -34,19 +35,43 @@ function getEmoji(props) {
 
 export default function scoreBoard (props){
   const emoji = getEmoji(props);
+  
 
   return (
     <div>
       <div className={"score"}>
-        Score: {emoji} {props.questionCorrectlySolved}/{props.totalQuestionsSolved}
+        
+      </div>
+      <div className={"QuizCard-container"}>
+        <div className={"QuizCard-title"} style={{textAlign:'center'}}>
+            Score: {emoji} {props.questionCorrectlySolved}/{10}
+        </div>
+        <form className={"QuizCard-form "}>
+            {props.correctAnswers.length ? (
+              <div id="answerContainer">
+                <div className="answerRow heading">
+                  <label>Your Answer</label>
+                  <label>Correct Answer</label>
+                </div>
+                {props.correctAnswers.map((ans,index)=>(
+                  <div className="answerRow" key={index}>
+                    <label className={props.yourAnswers[index] === ans ? "correct": "incorrect"}>
+                        {typeof props.yourAnswers[index] === "string" ? props.yourAnswers[index] : "Not answered"}
+                    </label>
+                    <label className="">{ans}</label>
+                  </div>
+                ))}
+              </div>
+            ):(
+              <Subtitle text="Loading result..."/>
+            )}
+        </form>
+
       </div>
 
       <div className={"quizGameBtnGrp"}>
-        <button className={"submitBtn"} onClick={props.refresh}>
-          👍 Play Again
-        </button>
-        <button className={"submitBtn"} onClick={props.goBackToMainMenu}>
-          🚁 Main Menu
+        <button className={"primaryBtn"} onClick={props.goBackToMainMenu}>
+          🚁 Play Again
         </button>
       </div>
     </div>

@@ -45,6 +45,8 @@
 .passedTimeContainer{
   text-align: center;
   margin: 10px;
+  display: flex;
+  justify-content: space-evenly;
 }
 .passedTimeContainer span{
   font-family: cursive,Arial, sans-serif;

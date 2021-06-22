@@ -7,6 +7,7 @@
   font-size: 3rem;
   font-family: "Kanit", sans-serif;
   text-align: center;
+  color: #c3f8ff;
 }
 .flotingTitle{
   position: fixed;
@@ -15,5 +16,5 @@
   background: #000428;
   z-index: 10;
   height: 90px;
-  z-index: 10;
+  z-index: 1;
 }
