@@ -1,6 +1,6 @@
 import {Component} from "react";
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component {  //This will handle runtime errors
     constructor() {
    	    super();
         this.state = { error: null, hasError: false };
@@ -21,14 +21,18 @@ class ErrorBoundary extends Component {
 
     render() {
         if(this.state.errorInfo){
-            return <div>
-            Oops, Something went worng, By the time you can play <a href="https://github.com/dhirendrapratapsingh/ArcadeGameCanvasES6"  target="_blank" rel="noopener noreferrer"> Arcade game see if you can cross this river </a>
-                <details style={{ whiteSpace: 'pre-wrap' }}>
-                {this.state.error && this.state.error.toString()}
-                <br />
-                {this.state.errorInfo.componentStack}
-                </details> 
-            </div>
+            return (<div style={{flexDirection: 'column',display: 'flex',height: '100vh'}}>
+                        <label style={{margin:'auto'}}>
+                        
+                            Oops, Something went worng, By the time you can play <br />
+                            <a href="https://github.com/dhirendrapratapsingh/ArcadeGameCanvasES6"  target="_blank" rel="noopener noreferrer"> Arcade game see if you can cross this river </a>
+                            <details style={{ whiteSpace: 'pre-wrap' }}>
+                                {this.state.error && this.state.error.toString()}
+                                <br />
+                                {this.state.errorInfo.componentStack}
+                            </details>
+                        </label>
+                    </div>)
         }
         else{
             return (<div>{this.props.children}</div>);
