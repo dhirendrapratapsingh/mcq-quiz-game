@@ -20,15 +20,16 @@ const Timer = (props) => { //a separate component to show passed time for modula
 
         let secondsInterval = setInterval(() => {
             setSeconds(seconds => {
-                if (seconds === 15) {
-                    props.completeQuiz();
-                }
+               
                 return parseInt((seconds + 1) % 60);
             });
         }, 1000);
 
         let minutesInterval = setInterval(() => {
             secs.current = secs.current + 1;
+            if (secs.current === 60) {
+                props.completeQuiz();
+            }
             setMinutes(parseInt((secs.current) / 60));
 
         }, 1000);

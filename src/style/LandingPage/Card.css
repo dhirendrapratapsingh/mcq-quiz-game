@@ -25,3 +25,19 @@
     rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
   transform: translateY(-3px) scale(1.1);
 }
+
+
+@media only screen and (max-width: 865px) {
+    .card{
+        height: auto;
+        padding: 6px;
+        font-size: 1rem;
+    }
+   
+}
+@media only screen and (max-width: 800px) {
+  
+    .card{
+        padding: 10px;
+    }
+}

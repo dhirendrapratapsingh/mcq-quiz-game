@@ -20,13 +20,9 @@
   .subtitle {
     font-size: 1.5rem;
   }
-  .card{
-    font-size: 1rem;
-    height: 3rem;
-  }
-  html{
+  /* html{
     height: auto;
-  }
+  } */
 }
 
 /* Very small screens */

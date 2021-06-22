@@ -5,7 +5,7 @@
 .answerRow{
   display: flex;
   justify-content: space-between;
-  padding: 1vh 10vh;
+  padding: 1vh 2vh;
   margin: 10px;
 }
 
