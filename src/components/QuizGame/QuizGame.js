@@ -85,7 +85,7 @@ export default class QuizGame extends Component {
         axios.get(`https://opentdb.com/api.php?amount=10&category=${categoryNum}&difficulty=${difficulty}&type=multiple`)
             .then(res => {
 
-                let results = [];//res.data.results;
+                let results = res.data.results;
                 let QAndA, options, correctAnswerSequence = [];
                 let QAndAsequence = results.map((item) => {
                     QAndA = {};
