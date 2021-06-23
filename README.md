@@ -1,6 +1,6 @@
 ## `Dependencies/Libraries used `
 
-### `No heavy weightinging th application with Layout frameworks, icon libraries etc Fully reponsive PWA for modurarized CSS  structure `
+### `No heavy weightinging th application with Layout frameworks, icon libraries etc. Fully reponsive PWA with modurarized CSS  structure `
 
 [React JS(UI)](https://reactjs.org/docs/getting-started.html),
 [axios( http API Calls)](https://www.npmjs.com/package/axios),
@@ -13,13 +13,6 @@
 `Install nodejs npm ` <br>
 From the step by step Guide described here [Installation of Node JS on Window](https://www.geeksforgeeks.org/installation-of-node-js-on-windows/)
 
-npm install create-react-app -g [react-app/YourAppName]<br>
-create-react-app trello-task-board<br>
-cd trello-task-board<br>
-npm start<br>
-
-Then open http://localhost:3000/ to see your app.<br>
-stop ctrl+c to add dependencies
 
 Download full codebase with public & src folder<br>
 
@@ -60,8 +53,10 @@ open http://localhost:3000/ to run app again.
 - Fully responsive, supports, phone, i-pad, desktop viewports.
 - Used React 17 having impeccable performance
 - handled Error condition by enclosing Whole application tree in Error boundary HOC
-- Implemented Modular coding structure, Code re-use techniques
+- Implemented Modular coding structure, Code re-use techniques : used Subtitle comp in many places
+  Whenever JSX got larger broke it into chunks or sub components
 - Added Fallback UI to handle Loading/negative cases in all components
+- Used lighter more relatable emmoji rather than icons library
 - Added error handling and validation check practices
 
 ## Screeshots
