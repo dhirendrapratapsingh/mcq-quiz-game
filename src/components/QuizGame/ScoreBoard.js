@@ -63,7 +63,7 @@ export default function scoreBoard (props){
                 ))}
               </div>
             ):(
-              <Subtitle text="Loading result..."/>
+              <Subtitle isBlack={true} text={props.QAndAsequence.length === 0 ? "This category does not has questions please try try another category" : "Loading result..."} />
             )}
         </form>
 

@@ -1,11 +1,14 @@
-### `Dependencies/Libraries used `
+## `Dependencies/Libraries used `
 
-## `No heavy weightinging th application with Layout frameworks, icon libraries etc Fully reponsive PWA for modurarized CSS  structure `
+### `No heavy weightinging th application with Layout frameworks, icon libraries etc Fully reponsive PWA for modurarized CSS  structure `
 
 [React JS(UI)](https://reactjs.org/docs/getting-started.html),
+[axios( http API Calls)](https://www.npmjs.com/package/axios),
+[react-loader-spinner(to show Loader)](https://www.npmjs.com/package/react-loader-spinner),
+[shortid(generate unique id's)](https://www.npmjs.com/package/shortid),
 
 
-### `Steps to create Project & add all dependencies in Windows OS`
+## `Steps to create Project & add all dependencies in Windows OS`
 
 `Install nodejs npm ` <br>
 From the step by step Guide described here [Installation of Node JS on Window](https://www.geeksforgeeks.org/installation-of-node-js-on-windows/)
@@ -23,7 +26,7 @@ Download full codebase with public & src folder<br>
 using terminal cd to mcq-quiz-game then run npm start<br>
 open http://localhost:3000/ to run app again.
 
-### Problem Statemnet and basic Features
+## Problem Statemnet and basic Features
 
 `Build a quiz game , The game should`
   - show some questions (MCQs) with single select or multi select options. (5-6 questions are fine for demo)`
@@ -45,11 +48,11 @@ open http://localhost:3000/ to run app again.
  Bonus points for react 
 
 
-### Extra features implemented or points taken care of
+## Extra features implemented or points taken care of
 
 - Used a real API https://opentdb.com/ to mak a real game fun to play & Addictive
 - Gave a choice to player in which category he wants to play the quiz
-- Added a Modal which tells player about the rules before game starts & lets him select difficulty level in vanilla Css
+- Added a Modal which tells player about the rules before game starts & lets him select difficulty level in vanilla CSS
 - Used light-weight simple to use emoji's
 - This game is a progressive web app, can run on any device with/without browsers, without/internet. Works Oflline
 - Install & play
@@ -61,7 +64,7 @@ open http://localhost:3000/ to run app again.
 - Added Fallback UI to handle Loading/negative cases in all components
 - Added error handling and validation check practices
 
-### Screeshots
+## Screeshots
 
 Homepage of Quiz Categories to choose in which user wants to play : Different Viewports screenshots
 ![HomepageCategoriesDifferentViewports](https://user-images.githubusercontent.com/32532380/123013231-7640e980-d3e1-11eb-994b-fc9cb5769734.jpg)

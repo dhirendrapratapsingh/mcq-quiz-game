@@ -27,7 +27,7 @@ const Timer = (props) => { //a separate component to show passed time for modula
 
         let minutesInterval = setInterval(() => {
             secs.current = secs.current + 1;
-            if (secs.current === 60) {
+            if (secs.current === 600) {
                 props.completeQuiz();
             }
             setMinutes(parseInt((secs.current) / 60));
@@ -85,7 +85,7 @@ export default class QuizGame extends Component {
         axios.get(`https://opentdb.com/api.php?amount=10&category=${categoryNum}&difficulty=${difficulty}&type=multiple`)
             .then(res => {
 
-                let results = res.data.results;
+                let results = [];//res.data.results;
                 let QAndA, options, correctAnswerSequence = [];
                 let QAndAsequence = results.map((item) => {
                     QAndA = {};
@@ -196,7 +196,7 @@ export default class QuizGame extends Component {
         let previouslySelectedAnswer = this.state.AnswerSequence[this.state.currentIndex] || "";
         //console.log(this.state);
 
-        const boardToShow = (this.state.currentQandA !== null && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
+        const boardToShow = (this.state.currentQandA && !this.state.showScoreBoard) ? (  //TODO: make 10 a state value 
             <div>
                 <QuizGameBoard
                     totalQuestionsSolved={this.state.totalQuestionsSolved}
@@ -226,6 +226,7 @@ export default class QuizGame extends Component {
                     goBackToMainMenu={this.props.goBackToMainMenu}
                     yourAnswers={this.state.AnswerSequence}
                     correctAnswers={this.state.correctAnswerSequence}
+                    QAndAsequence={this.state.QAndAsequence}
                 />
             );
 

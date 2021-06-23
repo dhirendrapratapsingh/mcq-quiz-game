@@ -30,7 +30,7 @@
 @media only screen and (max-width: 865px) {
     .card{
         height: auto;
-        padding: 6px;
+        padding: 10px;
         font-size: 1rem;
     }
    
@@ -38,6 +38,6 @@
 @media only screen and (max-width: 800px) {
   
     .card{
-        padding: 10px;
+        padding: 8px;
     }
 }
