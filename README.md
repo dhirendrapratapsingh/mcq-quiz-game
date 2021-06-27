@@ -13,7 +13,6 @@
 `Install nodejs npm ` <br>
 From the step by step Guide described here [Installation of Node JS on Window](https://www.geeksforgeeks.org/installation-of-node-js-on-windows/)
 
-
 Download full codebase with public & src folder<br>
 
 using terminal cd to mcq-quiz-game then run npm start<br>
@@ -22,23 +21,23 @@ open http://localhost:3000/ to run app again.
 ## Problem Statemnet and basic Features
 
 `Build a quiz game , The game should`
-  - show some questions (MCQs) with single select or multi select options. (5-6 questions are fine for demo)`
-  - the questions and options should come from an api (you can use static jsons).
-  - i should be able to go back and change my ans till the time i have not finished the game.
-  - there should be a time limit to finish the game (once time is over i should not be allowed to attempt answering).
-  - once i end the game i should see the result with correct answers.
+  - show some questions (MCQs) with single select or multi select options.
+  - the questions and options can come from an API (you can use static jsons).
+  - User should be able to go back and change my ans till the time player has not finished the game.
+  - there should be a time limit to finish the game (once time is over player should not be allowed to attempt answering).
+  - once test ends the game candidate should see the result with correct answers.
 
 `While doing that you need to take care of few things.`
 
  1. How do you want to structure the app / options / UI - UX is totally up to your creativity.
- 2. You need to handle basic pending / success / failure states ... you know api failures, slow internet, no internet... no results etc.
+ 2. You need to handle basic pending / success / failure states. In real life we have PAI failures, slow internet, no internet... no results etc.
  3. App needs to be responsive.
- 4. Please write unit test cases if possible.
- 5. Also have all of this in .git folder with proper commit messages.
+ 4. Also have all of this in .git folder with proper commit messages.
  
  `Note:` 
- Bonus points for a PWA
- Bonus points for react 
+ 1. Bonus points for a PWA   2. Bonus points for react 
+
+#### I have made a [presentation video of this MCQ quiz PWA game](https://drive.google.com/file/d/1S33_d7OSF_kZ3naJTlLlBDm7HriLXSjK/view?usp=sharing) developed explainig how to play, all the features, codebase & progrssive web app features 
 
 
 ## Extra features implemented or points taken care of
